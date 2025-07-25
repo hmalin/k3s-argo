@@ -1,20 +1,21 @@
+{{- $nginx := .Values.applications.nginx }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: {{ $nginx.name }}
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/hmalin/k3s-argo.git
-    targetRevision: HEAD
-    path: apps/nginx
+    repoURL: {{ $nginx.repoURL }}
+    targetRevision: {{ $nginx.targetRevision }}
+    path: {{ $nginx.path }}
     helm:
       valueFiles:
         - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: {{ $nginx.namespace }}
   syncPolicy:
     automated:
       prune: true
