@@ -8,9 +8,20 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/hmalin/k3s-argo.git' # UPDATE THIS URL
-    path: apps/{{ .name }}
+    {{- if .path }}
+    # For charts stored in your Git repository
+    repoURL: 'https://github.com/hmalin/k3s-argo.git'
+    path: {{ .path }}
     targetRevision: HEAD
+    {{- else }}
+    # For charts from an external Helm repository
+    repoURL: {{ .repo }}
+    chart: {{ .chart }}
+    targetRevision: {{ .version }}
+    helm:
+      values: |
+        {{- toYaml .values | nindent 8 }}
+    {{- end }}
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: {{ .namespace }}

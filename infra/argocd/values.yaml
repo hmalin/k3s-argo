@@ -1,3 +1,15 @@
+# infra/argocd/values.yaml
 applications:
+  # Example of a chart from your Git repo
   - name: nginx
     namespace: nginx-prod
+    path: apps/nginx # Uses the 'if .path' logic
+
+  # Example of an external Helm chart
+  - name: cert-manager
+    namespace: cert-manager
+    repo: https://charts.jetstack.io # Helm repo URL
+    chart: cert-manager # Name of the chart
+    version: v1.18.2 # The chart version
+    values: # Values passed to the Helm chart
+      installCRDs: true
