@@ -1,7 +1,3 @@
 applications:
-  nginx:
-    name: nginx-app
-    namespace: default
-    path: apps/nginx
-    repoURL: https://github.com/hmalin/k3s-argo.git
-    targetRevision: HEAD
+  - name: nginx
+    namespace: nginx-prod
