@@ -5,7 +5,7 @@ metadata:
   name: {{ .Chart.Name }}
 spec:
   selector:
-    app: {{ .Chart.Name }} # This must match the pod label in the deployment
+    app: {{ .Chart.Name }}
   ports:
     - protocol: TCP
       port: 80

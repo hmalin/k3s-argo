@@ -4,6 +4,7 @@ applications:
   - name: nginx
     namespace: nginx-prod
     path: apps/nginx # Uses the 'if .path' logic
+    isHelm: true # This is a Helm chart
 
   # Example of an external Helm chart
   - name: cert-manager
@@ -16,4 +17,5 @@ applications:
 
   - name: cluster-issuers # Add this entry
     namespace: cert-manager # Deploy into the cert-manager namespace
-    path: cluster-config/issuers    
+    path: cluster-config/issuers
+    # isHelm is omitted, so it will be treated as plain YAML

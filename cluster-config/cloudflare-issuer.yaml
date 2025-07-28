@@ -5,13 +5,13 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: lloydmalin15@gmail.com # Your real email
+    email: lloydmalin15@gmail.com # Your email
     privateKeySecretRef:
       name: letsencrypt-prod-key
     solvers:
     - dns01:
         cloudflare:
-          email: lloydmalin15@gmail.com # Your Cloudflare account email
+          email: lloydmalin15@gmail.com
           apiTokenSecretRef:
-            name: cloudflare-api-token # The secret you created in Step 2
+            name: cloudflare-api-token # cloudflare api token
             key: api-token

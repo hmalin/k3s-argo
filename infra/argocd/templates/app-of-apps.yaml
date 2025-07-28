@@ -9,10 +9,13 @@ spec:
   project: default
   source:
     {{- if .path }}
-    # For charts stored in your Git repository
+    # For resources stored in your Git repository
     repoURL: 'https://github.com/hmalin/k3s-argo.git'
     path: {{ .path }}
     targetRevision: HEAD
+    {{- if .isHelm }}
+    helm: {} # Add this block ONLY if it's a Helm chart
+    {{- end }}
     {{- else }}
     # For charts from an external Helm repository
     repoURL: {{ .repo }}

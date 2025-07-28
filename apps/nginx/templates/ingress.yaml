@@ -6,7 +6,7 @@ metadata:
   name: nginx
   annotations:
     kubernetes.io/ingress.class: "traefik"
-    cert-manager.io/cluster-issuer: "cloudflare-prod" # Your Cloudflare issuer
+    cert-manager.io/cluster-issuer: "cloudflare-prod" # Cloudflare issuer
 spec:
   tls:
   - hosts:
@@ -20,7 +20,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx # This MUST match the name of your Service
+            name: nginx # MUST match the name of your Service
             port:
               number: 80
 {{- end }}
