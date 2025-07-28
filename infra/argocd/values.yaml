@@ -13,3 +13,7 @@ applications:
     version: v1.18.2 # The chart version
     values: # Values passed to the Helm chart
       installCRDs: true
+
+  - name: cluster-issuers # Add this entry
+    namespace: cert-manager # Deploy into the cert-manager namespace
+    path: cluster-config/issuers    

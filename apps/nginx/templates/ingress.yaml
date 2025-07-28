@@ -1,0 +1,26 @@
+# apps/nginx/templates/ingress.yaml
+{{- if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "cloudflare-prod" # Your Cloudflare issuer
+spec:
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host | quote }}
+    secretName: nginx-tls # cert-manager creates this
+  rules:
+  - host: {{ .Values.ingress.host | quote }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx # This MUST match the name of your Service
+            port:
+              number: 80
+{{- end }}

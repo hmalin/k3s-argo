@@ -1,0 +1,12 @@
+# apps/nginx/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  selector:
+    app: {{ .Chart.Name }} # This must match the pod label in the deployment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http
