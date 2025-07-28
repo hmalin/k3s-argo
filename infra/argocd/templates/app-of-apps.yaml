@@ -8,22 +8,23 @@ metadata:
 spec:
   project: default
   source:
-    {{- if .path }}
-    # For resources stored in your Git repository
-    repoURL: 'https://github.com/hmalin/k3s-argo.git'
-    path: {{ .path }}
-    targetRevision: HEAD
-    {{- if .isHelm }}
-    helm: {} # Add this block ONLY if it's a Helm chart
-    {{- end }}
-    {{- else }}
-    # For charts from an external Helm repository
+    {{- if eq .type "helm-repo" }}
+    # Logic for external Helm charts
     repoURL: {{ .repo }}
     chart: {{ .chart }}
     targetRevision: {{ .version }}
     helm:
       values: |
         {{- toYaml .values | nindent 8 }}
+    {{- else }}
+    # Logic for anything in the Git repo
+    repoURL: 'https://github.com/hmalin/k3s-argo.git'
+    path: {{ .path }}
+    targetRevision: HEAD
+    {{- if eq .type "helm-git" }}
+    # Add the helm block only if it's a Helm chart in Git
+    helm: {}
+    {{- end }}
     {{- end }}
   destination:
     server: 'https://kubernetes.default.svc'

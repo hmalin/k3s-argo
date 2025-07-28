@@ -1,21 +1,23 @@
 # infra/argocd/values.yaml
 applications:
-  # Example of a chart from your Git repo
+  # Type 1: A Helm chart from your Git repo
   - name: nginx
     namespace: nginx-prod
-    path: apps/nginx # Uses the 'if .path' logic
-    isHelm: true # This is a Helm chart
+    path: apps/nginx
+    type: helm-git
 
-  # Example of an external Helm chart
+  # Type 2: A Helm chart from an external repo
   - name: cert-manager
     namespace: cert-manager
-    repo: https://charts.jetstack.io # Helm repo URL
-    chart: cert-manager # Name of the chart
-    version: v1.18.2 # The chart version
-    values: # Values passed to the Helm chart
+    repo: https://charts.jetstack.io
+    chart: cert-manager
+    version: v1.18.2
+    type: helm-repo
+    values:
       installCRDs: true
 
-  - name: cluster-issuers # Add this entry
-    namespace: cert-manager # Deploy into the cert-manager namespace
+  # Type 3: Plain YAML files from Git repo
+  - name: cluster-issuers
+    namespace: cert-manager
     path: cluster-config/issuers
-    # isHelm is omitted, so it will be treated as plain YAML
+    type: plain-git
