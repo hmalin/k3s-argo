@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - "nginx.malininc.com"
+    - {{ .Values.ingress.host | quote }}
     secretName: nginx-tls
   rules:
-  - host: "nginx.malininc.com"
+  - host: {{ .Values.ingress.host | quote }}
     http:
       paths:
       - path: /
