@@ -6,6 +6,11 @@ applications:
     path: apps/nginx
     type: helm-git
 
+  - name: it-tools
+    namespace: it-tools
+    path: apps/it-tools
+    type: helm-git  
+
   # Type 2: A Helm chart from an external repo
   - name: cert-manager
     namespace: cert-manager
