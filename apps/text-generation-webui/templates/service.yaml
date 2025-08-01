@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: genui
+  namespace: genui
+spec:
+  selector:
+    app: genui
+  ports:
+    - name: "webui"
+      protocol: TCP
+      port: 7860
+      targetPort: 7860
+    - name: "api"
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+    - name: "api-stream"
+      protocol: TCP
+      port: 5005
+      targetPort: 5005

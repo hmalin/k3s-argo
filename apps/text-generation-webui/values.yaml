@@ -1,0 +1,9 @@
+replicas: 1
+
+image:
+  repository: atinoda/text-generation-webui
+  tag: "default-cpu"
+
+ingress:
+  enabled: true
+  host: "genui.malininc.com" # Cloudflare Domain

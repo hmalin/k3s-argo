@@ -9,6 +9,11 @@ applications:
   - name: it-tools
     namespace: it-tools
     path: apps/it-tools
+    type: helm-git
+
+  - name: genui
+    namespace: genui
+    path: apps/text-generation-webui
     type: helm-git  
 
   # Type 2: A Helm chart from an external repo
@@ -20,6 +25,21 @@ applications:
     type: helm-repo
     values:
       installCRDs: true
+
+  - name: nfs-provisioner
+    namespace: nfs-provisioner
+    type: helm-repo
+    repo: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+    chart: nfs-subdir-external-provisioner
+    version: 4.0.18
+    values:
+      replicaCount: 1
+      nfs:
+        server: 192.168.50.10 #NFS server IP
+        path: /volume1/.srv/.unifi-drive/kubestore/.data #NFS share path
+      storageClass:
+        name: nfs-client
+        defaultClass: true    
 
   # Type 3: Plain YAML files from Git repo
   - name: cluster-issuers
