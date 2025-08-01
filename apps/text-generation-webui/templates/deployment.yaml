@@ -15,8 +15,9 @@ spec:
       containers:
       - name: genui
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        command: ["python", "server.py"]
         args:
+        - "python"
+        - "server.py"
         - "--listen"
         ports:
         - containerPort: 7860
