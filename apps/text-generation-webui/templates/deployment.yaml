@@ -16,9 +16,9 @@ spec:
       - name: genui
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         args:
-        - "python"
-        - "server.py"
-        - "--listen"
+        env:
+        - name: EXTRA_LAUNCH_ARGS
+          value: "--listen --verbose"
         ports:
         - containerPort: 7860
           name: webui
